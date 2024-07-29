@@ -1,0 +1,47 @@
+-- FlyScript.lua
+
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local flying = false
+local speed = 50
+local bodyVelocity = Instance.new("BodyVelocity")
+bodyVelocity.Velocity = Vector3.new(0,0,0)
+bodyVelocity.P = 1250
+bodyVelocity.MaxForce = Vector3.new(100000,100000,100000)
+
+-- Function to toggle flying
+local function toggleFly()
+    flying = not flying
+    if flying then
+        bodyVelocity.Parent = character.HumanoidRootPart
+        bodyVelocity.Velocity = Vector3.new(0, speed, 0)
+        bodyVelocity.MaxForce = Vector3.new(4000, 4000, 4000)
+        while flying do
+            local moveDirection = Vector3.new()
+            if UserInputService:IsKeyDown(Enum.KeyCode.W) then
+                moveDirection = moveDirection + (player.Character.HumanoidRootPart.CFrame.LookVector * speed)
+            end
+            if UserInputService:IsKeyDown(Enum.KeyCode.S) then
+                moveDirection = moveDirection - (player.Character.HumanoidRootPart.CFrame.LookVector * speed)
+            end
+            if UserInputService:IsKeyDown(Enum.KeyCode.A) then
+                moveDirection = moveDirection - (player.Character.HumanoidRootPart.CFrame.RightVector * speed)
+            end
+            if UserInputService:IsKeyDown(Enum.KeyCode.D) then
+                moveDirection = moveDirection + (player.Character.HumanoidRootPart.CFrame.RightVector * speed)
+            end
+            bodyVelocity.Velocity = moveDirection
+            wait()
+        end
+        bodyVelocity.Parent = nil
+    end
+end
+
+-- Bind the toggle function to a key (e.g., F)
+local UserInputService = game:GetService("UserInputService")
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if not gameProcessed and input.KeyCode == Enum.KeyCode.F then
+        toggleFly()
+    end
+end)
