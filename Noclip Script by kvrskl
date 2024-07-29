@@ -2,35 +2,34 @@
 
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
 local noclip = false
 
--- Function to toggle noclip
+-- Function to toggle noclip mode
 local function toggleNoclip()
     noclip = not noclip
     if noclip then
-        humanoid.PlatformStand = true
-        character.HumanoidRootPart.CanCollide = false
-        for _, part in ipairs(character:GetDescendants()) do
-            if part:IsA("BasePart") then
-                part.CanCollide = false
+        -- Disable collisions
+        for _,v in pairs(character:GetDescendants()) do
+            if v:IsA("BasePart") then
+                v.CanCollide = false
             end
         end
     else
-        humanoid.PlatformStand = false
-        character.HumanoidRootPart.CanCollide = true
-        for _, part in ipairs(character:GetDescendants()) do
-            if part:IsA("BasePart") then
-                part.CanCollide = true
+        -- Enable collisions
+        for _,v in pairs(character:GetDescendants()) do
+            if v:IsA("BasePart") then
+                v.CanCollide = true
             end
         end
     end
 end
 
--- Bind the toggle function to a key (e.g., F)
-local userInputService = game:GetService("UserInputService")
-userInputService.InputBegan:Connect(function(input, gameProcessed)
-    if not gameProcessed and input.KeyCode == Enum.KeyCode.F then
+-- Bind the toggle function to a key (e.g., N)
+local UserInputService = game:GetService("UserInputService")
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if not gameProcessed and input.KeyCode == Enum.KeyCode.N then
         toggleNoclip()
     end
 end)
