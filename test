@@ -1,0 +1,93 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+    Name = "KV-Ware Freemium",
+    LoadingTitle = "KV-Ware Inc.",
+    LoadingSubtitle = "by kvrskl",
+    ConfigurationSaving = {
+       Enabled = true,
+       FolderName = nil, -- Create a custom folder for your hub/game
+       FileName = "Big Hub"
+    },
+    Discord = {
+       Enabled = false,
+       Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+       RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+    },
+    KeySystem = true, -- Set this to true to use our key system
+    KeySettings = {
+       Title = "KV-Key Hub",
+       Subtitle = "KV's key system",
+       Note = "Get at discord server",
+       FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+       SaveKey = false, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+       GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+       Key = {"kvrskl is goated"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+    }
+ })
+
+ --MAIN
+ local MainTab = Window:CreateTab("Main", nil)
+ local MainSection = MainTab:CreateSection("Main")
+
+ Rayfield:Notify({
+    Title = "Don't forget to join discord server",
+    Content = "Join DC Server",
+    Duration = 5,
+    Image = nil,
+    Actions = { -- Notification Buttons
+       Ignore = {
+          Name = "Ok",
+          Callback = function()
+          print("The user tapped Ok")
+       end
+    },
+ },
+ })
+
+ local MainButton = MainTab:CreateButton({
+    Name = "ESP",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/kvrskl/kvrskl-official-Scripts/main/ESP%20Script%20by%20kvrskl"))()
+    end,
+ })
+
+ local MainButton = MainTab:CreateButton({
+    Name = "Silent Aim",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/kvrskl/kvrskl-official-Scripts/main/Silent%20aim%20script%20by%20kvrskl"))()
+    end,
+ })
+
+ local MainButton = MainTab:CreateButton({
+    Name = "FE Fake Lag (GhostPlayer352)",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostPlayer352/MainScripts352/main/Fe%20Fake%20Lag"))()
+    end,
+ })
+-- PLAYER
+local PlayerTab = Window:CreateTab("Player", nil)
+local PlayerSection = PlayerTab:CreateSection("Player")
+
+local PlayerButton = PlayerTab:CreateButton({
+    Name = "Reset Character",
+    Callback = function()
+        game.Players.LocalPlayer.Character.Head:Destroy()
+    end,
+ })
+-- ABOUT
+local AboutTab = Window:CreateTab("About", nil)
+local AboutSection = AboutTab:CreateSection("About")
+
+local AboutLabel = AboutTab:CreateLabel("Q: When was KV-Ware made?")
+
+local AboutLabel = AboutTab:CreateLabel("A: KV-Ware was made in July 28, 2024.")
+
+local AboutLabel = AboutTab:CreateLabel("Q: How much robux will Premium be?")
+
+local AboutLabel = AboutTab:CreateLabel("A: From August 29 it will be 250 robux, till August 3 it will be 15.")
+
+local AboutLabel = AboutTab:CreateLabel("Q: When will Premium be released? and how long did it take you to make this?")
+
+local AboutLabel = AboutTab:CreateLabel("A: It will be released until it's finished and KV-Ware Freemium took me around 20 minutes.")
+
